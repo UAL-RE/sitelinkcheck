@@ -2,7 +2,7 @@ name: DataCooperative
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 23 * * 0' # every Sunday at 11pm
+    - cron: '0 11 * * 1' # every Monday at 4 AM (11 AM UTC)
 env:
   OUTDIR: 'dcoop'
   SITE: 'https://data.library.arizona.edu'
@@ -53,6 +53,7 @@ jobs:
         id: commit-action
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           commit_message: 📝 Create report for ${{ github.workflow }} [skip ci]
       - name: short sha
         id: get_short_sha
