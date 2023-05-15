@@ -16,4 +16,5 @@ ignore=
 [output]
 ignoreerrors=
   ^mailto:
+  ^https?://(www.)?instagram.com/UAZ_ReDATA ^TooManyRedirects
 #  .* ^403 Forbidden
