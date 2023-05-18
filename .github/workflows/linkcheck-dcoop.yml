@@ -6,7 +6,7 @@ on:
 env:
   OUTDIR: 'dcoop'
   SITE: 'https://data.library.arizona.edu'
-  NOTIFY: '@zoidy @jcoliver @heatherfro' #enter GitHub IDs in the form @username. Separate multiple entries by commas or spaces
+  NOTIFY: '@zoidy @jcoliver @heatherfro @dajama8' #enter GitHub IDs in the form @username. Separate multiple entries by commas or spaces
 
 jobs:
   runlinkcheck:
