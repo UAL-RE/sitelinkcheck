@@ -17,8 +17,8 @@ ignore=
 ignoreerrors=
   ^mailto:
   ^https?://(www.)?instagram.com/UAZ_ReDATA ^TooManyRedirects
-  ^https://confluence.arizona.edu/display/UAIS/ ^ConnectionError: HTTPSConnectionPool.* Max retries exceeded
+  ^https://confluence.arizona.edu/display/UAIS/ ^ConnectTimeout: HTTPSConnectionPool.* Max retries exceeded
   https://doi.org/10.5281/zenodo.1234
   ^https?://(www.)?onlinelibrary.wiley.com ^403 Forbidden
-  ^https?://(www.)?sciencedirect.com/journal ^403 Forbidden  
-#  .* ^403 Forbidden
+  ^https?://(www.)?sciencedirect.com/journal ^403 Forbidden
+  ^https://covid19researchdatabase.org ^403 Forbidden
