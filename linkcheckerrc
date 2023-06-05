@@ -16,9 +16,11 @@ ignore=
 [output]
 ignoreerrors=
   ^mailto:
+  .* .*SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED.*
   ^https?://(www.)?instagram.com/UAZ_ReDATA ^TooManyRedirects
   ^https://confluence.arizona.edu/display/UAIS/ ^ConnectTimeout: HTTPSConnectionPool.* Max retries exceeded
   https://doi.org/10.5281/zenodo.1234
   ^https?://(www.)?onlinelibrary.wiley.com ^403 Forbidden
   ^https?://(www.)?sciencedirect.com/journal ^403 Forbidden
   ^https://covid19researchdatabase.org ^403 Forbidden
+  ^https://libcal.library.arizona.edu ^ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
