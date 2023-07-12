@@ -24,3 +24,4 @@ ignoreerrors=
   ^https?://(www.)?sciencedirect.com/journal ^403 Forbidden
   ^https://covid19researchdatabase.org ^403 Forbidden
   ^https://libcal.library.arizona.edu ^ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  ^https://disboard.org/server/769917190182404127 ^403 Forbidden
