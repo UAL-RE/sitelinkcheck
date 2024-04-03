@@ -1,0 +1,21 @@
+[checking]
+threads=20
+timeout=30
+aborttimeout=10
+useragent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+sslverify=0
+robotstxt=0
+
+[filtering]
+checkextern=1
+ignorewarnings=http-redirected
+ignore=
+  .css$
+  .js$
+  ^mailto:
+
+[output]
+ignoreerrors=
+  ^mailto:
+  .* .*SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED.*
+
