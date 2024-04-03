@@ -1,4 +1,4 @@
-name: DataCooperative
+name: ReDATA
 on:
   workflow_dispatch:
   schedule:
