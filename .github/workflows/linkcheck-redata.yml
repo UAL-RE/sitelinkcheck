@@ -40,14 +40,14 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
-      - name: fetch data from figshare
-        run:
-          python .github/workflows/json_to_html_redata.py ${{ env.SITE }} ${{ runner.temp }}/data.html
       - name: install linkchecker
         run: pip install -r requirements.txt
       - name: set output filename
         run:
           echo "OUTFILE=$(date "+%Y.%m.%d-%H.%M.%S").html" >> "$GITHUB_ENV"
+      - name: fetch data from figshare
+        run:
+          python .github/workflows/json_to_html_redata.py ${{ env.SITE }} ${{ runner.temp }}/data.html          
       - name: run check
         continue-on-error: true
         run:
