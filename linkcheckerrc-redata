@@ -13,9 +13,11 @@ ignore=
   .css$
   .js$
   ^mailto:
+  ^https://figshare.com
+  ^https://api.figshare.com
+  ^https://ndownloader.figshare.com
 
 [output]
 ignoreerrors=
   ^mailto:
   .* .*SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED.*
-
