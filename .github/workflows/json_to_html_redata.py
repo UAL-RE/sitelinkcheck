@@ -7,6 +7,7 @@ import requests
 import re
 import string
 import sys
+import os
 
 def add_link_tags(text):
   """
@@ -84,5 +85,6 @@ if __name__ == "__main__":
            
            file.write(jsonstr + "<br><br><br>")
        file.write("</html>")
+       print(os.path.realpath(file.name))
 
    print("HTML created successfully!")
