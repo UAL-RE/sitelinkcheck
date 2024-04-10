@@ -51,7 +51,7 @@ jobs:
       - name: run check
         continue-on-error: true
         run: |
-          linkchecker -f linkcheckerrc-${{ env.OUTDIR }} -F html/reports/${{ env.OUTDIR }}/${{ env.OUTFILE }} ../data.html
+          linkchecker -f linkcheckerrc-${{ env.OUTDIR }} -F html/reports/${{ env.OUTDIR }}/${{ env.OUTFILE }} `pwd`/data.html
           rm data.html
       - name: commit output report
         id: commit-action
