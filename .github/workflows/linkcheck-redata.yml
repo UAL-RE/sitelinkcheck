@@ -44,13 +44,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: set output filename
         run:
-          echo "OUTFILE=$(date "+%Y.%m.%d-%H.%M.%S").html" >> "$GITHUB_ENV"
-      - name: fetch data from figshare
-        run:
-          python .github/workflows/json_to_html_redata.py ${{ env.SITE }} data.html          
+          echo "OUTFILE=$(date "+%Y.%m.%d-%H.%M.%S").html" >> "$GITHUB_ENV"        
       - name: run check
         continue-on-error: true
         run: |
+          python .github/workflows/json_to_html_redata.py ${{ env.SITE }} data.html 
           linkchecker -f linkcheckerrc-${{ env.OUTDIR }} -F html/reports/${{ env.OUTDIR }}/${{ env.OUTFILE }} data.html
           rm data.html
       - name: commit output report
