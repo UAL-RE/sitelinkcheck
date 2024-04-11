@@ -53,10 +53,11 @@ jobs:
         continue-on-error: true
         run: |
           rm data.html
-          for f in data*.html; do linkchecker  -f  linkcheckerrc-${{ env.OUTDIR }} -F html/tmpreport$(date +%s).html ${f}; done;
+          for f in data*.html; do linkchecker -f linkcheckerrc-${{ env.OUTDIR }} -F html/tmpreport$(date +%s).html "${f}"; done;
           rm data*.html
       - name: process report
         run: |
+          find -name "tmpreport*.html"
           cat $(find -name "tmpreport*.html" | head -n1) | head -n25 > reports/${{ env.OUTDIR }}/${{ env.OUTFILE }}
           for f in tmpreport*.html; do tail -n+26 ${f} | head -n-1 >> reports/${{ env.OUTDIR }}/${{ env.OUTFILE }}; done;
           echo "</small></body></html>" >> reports/${{ env.OUTDIR }}/${{ env.OUTFILE }}
