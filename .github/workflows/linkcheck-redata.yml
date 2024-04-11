@@ -48,7 +48,7 @@ jobs:
       - name: fetch data from figshare
         run: |
           python .github/workflows/json_to_html_redata.py ${{ env.SITE }} data.html
-          split -d -b1M --additional-suffix=.html data.html data
+          split -d --verbose -b1M --additional-suffix=.html data.html data
       - name: run check
         continue-on-error: true
         run: |
