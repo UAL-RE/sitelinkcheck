@@ -53,8 +53,7 @@ jobs:
         continue-on-error: true
         run: |
           rm data.html
-          for f in ${pwd}data*.html; do linkchecker  -f  linkcheckerrc-${{ env.OUTDIR }} -F html/tmpreport$(date +%s).html ${f}; done;
-          #linkchecker -v -f linkcheckerrc-${{ env.OUTDIR }} -F html/reports/${{ env.OUTDIR }}/${{ env.OUTFILE }} `pwd`/data.html
+          for f in data*.html; do linkchecker  -f  linkcheckerrc-${{ env.OUTDIR }} -F html/tmpreport$(date +%s).html ${f}; done;
           rm data*.html
       - name: process report
         run: |
