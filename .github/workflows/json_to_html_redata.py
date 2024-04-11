@@ -7,6 +7,7 @@ import requests
 import re
 import string
 import sys
+import os
 
 def add_link_tags(text):
   """
@@ -71,7 +72,6 @@ if __name__ == "__main__":
    all_objects = retrieve_all_data(base_url)
    
    with open(outputpath, "w", encoding="utf-8") as file:
-       file.write("<html>")
        for obj in all_objects:           
            url = obj["url_public_api"]
            
@@ -83,6 +83,6 @@ if __name__ == "__main__":
            jsonstr = add_link_tags(json.dumps(json_data).replace('\\"', '"'))
            
            file.write(jsonstr + "<br><br><br>")
-       file.write("</html>")
+       print(os.path.realpath(file.name))
 
    print("HTML created successfully!")
