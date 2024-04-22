@@ -21,3 +21,5 @@ ignore=
 ignoreerrors=
   ^mailto:
   .* .*SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED.*
+  ^https://twitter.com ^400 Bad Request
+  ^https://app.dimensions.ai ^405 Not Allowed
