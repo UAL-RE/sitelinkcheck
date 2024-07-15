@@ -22,6 +22,12 @@ ignoreerrors=
   ^https://confluence.arizona.edu/display/UAIS/ ^ConnectTimeout: HTTPSConnectionPool.* Max retries exceeded
   https://doi.org/10.5281/zenodo.1234
   ^https?://(www.)?onlinelibrary.wiley.com ^403 Forbidden
+  ^https://vimeo.com/402702466 ^403 Forbidden
+  ^https://mappingsupport.com/p/surf_gis/list-federal-state-county-city-GIS-servers.pdf ^404 Not Found
+  ^https://geomap.ffiec.gov/FFIECGeocMap/GeocodeMap1.aspx ^403 Forbidden
+  ^https://libguides.library.arizona.edu/digitalsanborn ^403 Forbidden
+  ^https://ualib-uagis.hub.arcgis.com/apps/digital-storytelling-an-introduction-to-arcgis-storymaps/explore ^404 Not Found
+  ^https://ualib-uagis.hub.arcgis.com/apps/level-up-your-storymaps/explore ^404 Not Found
   ^https?://(www.)?sciencedirect.com/journal ^403 Forbidden
   ^https://covid19researchdatabase.org ^403 Forbidden
   ^https://libcal.library.arizona.edu ^ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
