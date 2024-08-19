@@ -13,6 +13,7 @@ ignore=
   .css$
   .js$
   ^mailto:
+  ^429 Too Many Requests
 
 [output]
 ignoreerrors=
@@ -35,4 +36,3 @@ ignoreerrors=
   ^https://asistdl.onlinelibrary.wiley.com/doi/10.1002/asi.23358 ^403 Forbidden
   ^https://twitter.com ^400 Bad Request
   mission-bg.jpg$ ^404 Not Found
-  .* ^429 Too Many Requests
