@@ -165,7 +165,7 @@ jobs:
         with:
           actions: 'update-issue'
           token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ join(needs.on-success.outputs.issue, needs.on-error.outputs.issue '') }}
+          issue-number: ${{ join(needs.on-success.outputs.issue, needs.on-error.outputs.issue, '') }}
           state: 'closed'          
           body: '${{ env.NOTIFY }}'
           update-mode: 'append'
