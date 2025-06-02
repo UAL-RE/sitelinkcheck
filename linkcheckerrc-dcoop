@@ -37,5 +37,5 @@ ignoreerrors=
   ^https://vimeo.com/402702466 ^403 Forbidden
   ^https://asistdl.onlinelibrary.wiley.com/doi/10.1002/asi.23358 ^403 Forbidden
   ^https://twitter.com ^400 Bad Request
-  ^https://vimeo.com/* ^429 Too Many Requests
+  .* ^429 Too Many Requests
   ^http://wms.cartographic.com/evgc/universityofarizona/ ^401 Unauthorized
