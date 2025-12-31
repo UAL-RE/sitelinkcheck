@@ -1,12 +1,12 @@
 name: DataCooperative
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: '0 11 1,15 * *' # every 1st and 15th of the month at 4 AM (11 AM UTC)
+  schedule:
+    - cron: '0 11 10 * *' # every 10th of the month at 4 AM (11 AM UTC)
 env:
   OUTDIR: 'dcoop'
-  SITE: 'https://data.library.arizona.edu'
-  NOTIFY: '@zoidy @jcoliver @heatherfro @dajama8 @GarrettRSmith' #enter GitHub IDs in the form @username. Separate multiple entries by commas or spaces
+  SITE: 'https://lib.arizona.edu/research/data'
+  NOTIFY: '@zoidy @jcoliver @heatherfro @dajama8 @GarrettRSmith @HafeezOJ' #enter GitHub IDs in the form @username. Separate multiple entries by commas or spaces
 
 jobs:
   runlinkcheck:
@@ -30,13 +30,18 @@ jobs:
           cache: 'pip'
       - name: install linkchecker
         run: pip install -r requirements.txt
+      - name: install playwright
+        run: python -m playwright install --with-deps --no-shell chromium
       - name: set output filename
         run:
           echo "OUTFILE=$(date "+%Y.%m.%d-%H.%M.%S").html" >> "$GITHUB_ENV"
-      - name: run check
+      - name: run check stage 1
         continue-on-error: true
         run:
-          linkchecker -f linkcheckerrc-${{ env.OUTDIR }} -F html/reports/${{ env.OUTDIR }}/${{ env.OUTFILE }} ${{ env.SITE }}
+          linkchecker -f linkcheckerrc-${{ env.OUTDIR }} -F html/linkchecker-out.html ${{ env.SITE }}
+      - name: run check stage 2
+        run:
+           python linkchecker-stage2.py linkchecker-out.html reports/${{ env.OUTDIR }}/${{ env.OUTFILE }}
       - name: commit output report
         id: commit-action
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -68,7 +73,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'reports'      # upload generated folder       
+          path: 'reports'      # upload generated folder
   
   
   deploy: #ensure GH pages has been enabled w/GitHub Actions as a source on the repo or this will fail

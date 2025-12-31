@@ -1,2 +1,4 @@
 linkchecker >= 10.2.1
+pytest-playwright >= 0.7.0
+playwright-stealth >= 2.0.0
 requests

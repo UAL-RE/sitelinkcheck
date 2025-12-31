@@ -5,37 +5,41 @@ aborttimeout=10
 useragent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
 sslverify=0
 robotstxt=0
+recursionlevel=5
 
 [filtering]
 checkextern=1
-ignorewarnings=http-redirected
+ignorewarnings=http-redirected,url-whitespace
 ignore=
   .css$
+  .*\/css\/.*
   .js$
-  ^mailto:
-  ^429 Too Many Requests
+nofollow=
+  .*lib\.arizona\.edu\/locations.*
+  .*lib\.arizona\.edu\/hours.*
+  .*lib\.arizona\.edu\/help.*
+  .*lib\.arizona\.edu\/about.*
+  lib\.arizona\.edu\/accessibility$
+  lib\.arizona\.edu\/contact$
+  lib\.arizona\.edu\/cas$
+  lib\.arizona\.edu\/research$
+  .*lib\.arizona\.edu\/research\/sources.*
+  .*lib\.arizona\.edu\/research\/plan.*
+  .*lib\.arizona\.edu\/research\/share.*
+  .*lib\.arizona\.edu\/research\/support\/funding.*
+  .*lib\.arizona\.edu\/borrow.*
+  .*lib\.arizona\.edu\/find.*
+  .*lib\.arizona\.edu\/study.*
+  .*lib\.arizona\.edu\/teaching.*
+  .*lib\.arizona\.edu\/catalyst.*
+  .*lib\.arizona\.edu\/special-collections.*
+  lib\.arizona\.edu$
+  lib\.arizona\.edu\/$
+  university-arizona-land-acknowledgment$
+  www\.arizona\.edu\/information-security-privacy$
+  www\.arizona\.edu$
+  www\.arizona\.edu\/$
 
 [output]
 ignoreerrors=
-  ^mailto:
-  mission-bg.jpg$ ^404 Not Found
-  .* .*SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED.*
-  ^https://confluence.arizona.edu/display/UAIS/ ^ConnectTimeout: HTTPSConnectionPool.* Max retries exceeded
-  ^https://covid19researchdatabase.org ^403 Forbidden
-  ^https://disboard.org/server/769917190182404127 ^403 Forbidden
   https://doi.org/10.5281/zenodo.1234
-  ^https://geomap.ffiec.gov/FFIECGeocMap/GeocodeMap1.aspx ^403 Forbidden
-  ^https?://(www.)?instagram.com/UAZ_ReDATA ^TooManyRedirects
-  ^https://libcal.library.arizona.edu ^ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
-  ^https://libguides.library.arizona.edu/digitalsanborn ^403 Forbidden
-  ^https://mappingsupport.com/p/surf_gis/list-federal-state-county-city-GIS-servers.pdf ^404 Not Found
-  ^https?://(www.)?onlinelibrary.wiley.com ^403 Forbidden
-  ^https://player.vimeo.com/* ^401 Unauthorized
-  ^https?://(www.)?sciencedirect.com/journal ^403 Forbidden
-  ^https://ualib-uagis.hub.arcgis.com/apps/digital-storytelling-an-introduction-to-arcgis-storymaps/explore ^404 Not Found
-  ^https://ualib-uagis.hub.arcgis.com/apps/level-up-your-storymaps/explore ^404 Not Found
-  ^https://vimeo.com/402702466 ^403 Forbidden
-  ^https://asistdl.onlinelibrary.wiley.com/doi/10.1002/asi.23358 ^403 Forbidden
-  ^https://twitter.com ^400 Bad Request
-  .* ^429 Too Many Requests
-  ^http://wms.cartographic.com/evgc/universityofarizona/ ^401 Unauthorized
