@@ -23,36 +23,79 @@ async def check_links(input_file, output_report_file):
             await browser.close()
             return
 
-        # Locate all cells with class "url"
-        url_cells = await page.locator(".url").all()
-        urls = [await cell.inner_text() for cell in url_cells]
+        tables = await page.locator('table').all()
+
+        urls = []
+        for table in tables:
+            data = {
+                "url": None,
+                "name": None,
+                "parent_url": None
+            }
+
+            # Locate all rows within this specific table
+            rows = await table.locator('tr').all()
+
+            for row in rows:
+                # Get all cells (td) in the row
+                cells = await row.locator('td').all()
+                if len(cells) != 2:
+                    continue
+
+                label = (await cells[0].inner_text()).strip()
+
+                #Extract URL (strip backticks)
+                if label == "URL":
+                    raw_url = (await cells[1].inner_text()).strip()
+                    data["url"] = raw_url.strip("`'").strip()
+
+                # 2. Extract Name (strip backticks)
+                elif label == "Name":
+                    raw_name = (await cells[1].inner_text()).strip()
+                    data["name"] = raw_name.strip("`'").strip()
+
+                # 3. Extract Parent URL (find the href of the link)
+                # Note: Playwright handles &nbsp; as a normal space in inner_text()
+                elif "Parent" in label:
+                    link = cells[1].locator('a').first
+                    if (await link.count()) > 0:
+                        data["parent_url"] = await link.get_attribute('href')
+
+            # Add to results if we found valid data
+            if data["url"] or data["name"]:
+                urls.append(data)
+        
         await page.close()
         
         print(f"Found {int(len(urls)/2)} URLs to check.")
 
         # Iterate through each URL found
         for url in urls:
-            url = url.strip()
-            url = '' if url == 'URL' else url # Ignore entries in the table that just contain the text 'URL'
+            parent_url = url["parent_url"]
+            name = url ["name"]
+            url = url["url"]
             if not url:
                 continue
 
             page = await c.new_page()
 
-            # strip leading and trailing apostrophes that exists in every url
-            url = url[1:-1]
             print(f"Checking: {url}")
             try:
-                results.append(await checkURL(page, url))
+                result = await checkURL(page, url)
+                result['parent_url'] = parent_url
+                result['name'] = name
+                results.append(result)
             except Exception as e:
                 # http->https redirections don't work for some sites, even though they work in a regular browser
                 if url.startswith('http://') and type(e) is PlaywrightTimeoutError:
                     result = await checkURL(page, url.replace('http://', 'https://', 1))
                     result['status'] = 'Warning'
                     result['details'] += ' The original link was http://. Checked the https version.'
+                    result['parent_url'] = parent_url
+                    result['name'] = name
                     results.append(result)
                 else:
-                    results.append({"url": url, "status": "Error", "details": str(e)})
+                    results.append({"url": url, "parent_url": parent_url, "name": name, "status": "Error", "details": str(e)})
             print(results[-1]['details'])
             await page.close()
 
@@ -117,7 +160,10 @@ def generate_report(results, output_report_file):
         if status_class == 'error' or status_class == 'warning' :
             html_content += f"""
                 <tr>
-                    <td><a href="{row['url']}">{row['url']}</a></td>
+                    <td>
+                    <p><b>URL:</b> <a href="{row['url']}">{row['url']}</a></p>
+                    <p><b>Parent:</b> <a href="{row['parent_url']}">{row['parent_url']}</a></p>
+                    <p><b>Name:</b> {row['name']}</p></td>
                     <td class="{status_class}">{row['status']}</td>
                     <td>{row['details']}</td>
                 </tr>
