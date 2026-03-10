@@ -88,12 +88,15 @@ async def check_links(input_file, output_report_file):
             except Exception as e:
                 # http->https redirections don't work for some sites, even though they work in a regular browser
                 if url.startswith('http://') and type(e) is PlaywrightTimeoutError:
-                    result = await checkURL(page, url.replace('http://', 'https://', 1))
-                    result['status'] = 'Warning'
-                    result['details'] += ' The original link was http://. Checked the https version.'
-                    result['parent_url'] = parent_url
-                    result['name'] = name
-                    results.append(result)
+                    try:
+                        result = await checkURL(page, url.replace('http://', 'https://', 1))
+                        result['status'] = 'Warning'
+                        result['details'] += ' The original link was http://. Checked the https version.'
+                        result['parent_url'] = parent_url
+                        result['name'] = name
+                        results.append(result)
+                    except Exception as e2:
+                        results.append({"url": url, "parent_url": parent_url, "name": name, "status": "Error", "details": str(e2)})    
                 else:
                     results.append({"url": url, "parent_url": parent_url, "name": name, "status": "Error", "details": str(e)})
             print(results[-1]['details'])
