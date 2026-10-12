@@ -179,12 +179,7 @@ jobs:
       issues: write
       
     steps:
-      - name: Update issue
-        uses: actions-cool/issues-helper@v3
-        with:
-          actions: 'update-issue'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ format('{0}{1}', needs.on-success.outputs.issue, needs.on-error.outputs.issue) }}
-          state: 'closed'          
-          body: '${{ env.NOTIFY }}'
-          update-mode: 'append'
+      - name: Close Issue
+        run: gh issue close ${{ format('{0}{1}', needs.on-success.outputs.issue, needs.on-error.outputs.issue) }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
