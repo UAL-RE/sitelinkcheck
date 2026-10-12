@@ -43,3 +43,4 @@ nofollow=
 [output]
 ignoreerrors=
   https://doi.org/10.5281/zenodo.1234
+  ^https://commons.datacite.org ^429
